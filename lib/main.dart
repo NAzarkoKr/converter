@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/presentation/bloc/weather_cubit/weather_cubit.dart';
+import 'package:weather/presentation/injector.dart' as di;
+import 'package:weather/presentation/weather.dart';
 
-void main() {
+void main() async {
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -9,9 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: Container(),
-    );
+    return BlocProvider<WeatherCubit>(
+        create: (context) => di.sl<WeatherCubit>(),
+        child: const CupertinoApp(
+          title: 'Flutter Demo',
+          home: WeatherHome(),
+        ));
   }
 }
