@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/presentation/bloc/weather_cubit/weather_cubit.dart';
+import 'package:weather/presentation/widgets/button.dart';
+import 'package:weather/presentation/widgets/text_field.dart';
 
 class WeatherHome extends StatefulWidget {
   const WeatherHome({super.key});
@@ -99,65 +101,5 @@ class _WeatherHomeState extends State<WeatherHome> {
     cityController.dispose();
 
     super.dispose();
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SizedBox(
-        height: 60,
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: const Text(
-            "Check",
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    Key? key,
-    required this.hintText,
-    required this.controller,
-  }) : super(key: key);
-
-  final TextEditingController controller;
-  final String hintText;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: SizedBox(
-        height: 60,
-        child: CupertinoTextField(
-          placeholder: hintText,
-          controller: controller,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.blue,
-              )),
-        ),
-      ),
-    );
   }
 }

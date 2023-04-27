@@ -8,6 +8,7 @@ import 'package:weather/domain/repository/weather_repository.dart';
 import 'package:weather/domain/usecases/get_currency_usecase.dart';
 import 'package:weather/domain/usecases/get_weather_usecase.dart';
 import 'package:weather/presentation/bloc/bottom_navbar_cubit/nav_bar_cubit.dart';
+import 'package:weather/presentation/bloc/currency_converter_bloc/currency_converter_bloc.dart';
 import 'package:weather/presentation/bloc/weather_cubit/weather_cubit.dart';
 
 final sl = GetIt.instance;
@@ -16,6 +17,8 @@ Future<void> init() async {
   //blocs
   sl.registerFactory(() => WeatherCubit(getWeatherUsecase: sl.call()));
   sl.registerFactory(() => NavBarCubit());
+  sl.registerFactory(
+      () => CurrencyConverterBloc(getCurrencyUsecase: sl.call()));
 
   //usecases
   sl.registerLazySingleton(

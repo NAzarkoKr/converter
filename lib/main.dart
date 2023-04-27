@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/presentation/bloc/bottom_navbar_cubit/nav_bar_cubit.dart';
+import 'package:weather/presentation/bloc/currency_converter_bloc/currency_converter_bloc.dart';
 import 'package:weather/presentation/bloc/weather_cubit/weather_cubit.dart';
 import 'package:weather/presentation/converter.dart';
 import 'package:weather/presentation/injector.dart' as di;
@@ -19,9 +21,17 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<NavBarCubit>(create: (context) => di.sl<NavBarCubit>()),
-          BlocProvider<WeatherCubit>(create: (context) => di.sl<WeatherCubit>())
+          BlocProvider<WeatherCubit>(
+              create: (context) => di.sl<WeatherCubit>()),
+          BlocProvider<CurrencyConverterBloc>(
+              create: (context) => di.sl<CurrencyConverterBloc>())
         ],
         child: CupertinoApp(
+          localizationsDelegates: const [
+            DefaultMaterialLocalizations.delegate,
+            DefaultCupertinoLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+          ],
           title: 'Flutter Demo',
           home: CupertinoTabScaffold(
             tabBar: CupertinoTabBar(
@@ -42,7 +52,7 @@ class MyApp extends StatelessWidget {
                 if (index == 0) {
                   return const WeatherHome();
                 } else if (index == 1) {
-                  return const ConverterHome();
+                  return const ConvertHome();
                 }
                 return Container();
               });
